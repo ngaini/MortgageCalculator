@@ -4,14 +4,20 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+    private static SeekBar seekbar_var;
+    private static TextView seekbar_text_var;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        seekbarMethod();
     }
 
 
@@ -35,5 +41,49 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // logic for the seekbar
+    private void seekbarMethod()
+    {
+        seekbar_var = (SeekBar) findViewById(R.id.interest_rate_seekbar);
+        seekbar_text_var =(TextView) findViewById(R.id.interestRate_textview);
+        seekbar_text_var.setText("Interest rate ");
+
+        seekbar_var.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    private int seekBar_value;
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+                    {
+//                        seekBar_value =progress;
+//                        seekbar_text_var.setText("Interest rate : "+getCoversionIntoFloat(progress));
+//                        Toast.makeText(MainActivity.this,"SeekBar in onProgress"+progress+"",Toast.LENGTH_SHORT).show();
+
+                        float value= (float) (progress / 10.0);
+                        seekbar_text_var.setText("Interest rate : "+value);
+                        Toast.makeText(MainActivity.this,"SeekBar in onProgress "+progress+"",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar)
+                    {
+                        Toast.makeText(MainActivity.this,"SeekBar in startTracking",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar)
+                    {
+                        Toast.makeText(MainActivity.this,"SeekBar in stopTracking",Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    double getCoversionIntoFloat(int value )
+    {
+        double floatValue = 0.0;
+        floatValue = value/10;
+        return floatValue;
     }
 }

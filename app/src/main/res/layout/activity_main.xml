@@ -12,21 +12,29 @@
         android:id="@+id/amount_borrowed_text"
         android:minWidth="100dp"
         android:minHeight="50dp"
+        android:maxHeight="50dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:hint="0.0"
+        android:hint="Enter Borrowed Amount"
 
         />
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/interest_rate_seekbar"
-        android:minHeight="100dp"
         android:minWidth="200dp"
-        android:layout_gravity="center_vertical"
+        android:minHeight="100dp"
+        android:maxHeight="100dp"
         android:max="100"
+        android:layout_gravity="center"
+        />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/interestRate_textview"
+        android:layout_gravity="center"
         />
 
 </LinearLayout>
