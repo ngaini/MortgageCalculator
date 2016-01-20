@@ -62,19 +62,19 @@ public class MainActivity extends ActionBarActivity {
 
                         float value= (float) (progress / 10.0);
                         seekbar_text_var.setText("Interest rate : "+value);
-                        Toast.makeText(MainActivity.this,"SeekBar in onProgress "+progress+"",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this,"SeekBar in onProgress "+progress+"",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar)
                     {
-                        Toast.makeText(MainActivity.this,"SeekBar in startTracking",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this,"SeekBar in startTracking",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar)
                     {
-                        Toast.makeText(MainActivity.this,"SeekBar in stopTracking",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this,"SeekBar in stopTracking",Toast.LENGTH_SHORT).show();
                     }
                 }
         );
