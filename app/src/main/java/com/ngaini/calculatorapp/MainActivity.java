@@ -2,8 +2,15 @@ package com.ngaini.calculatorapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,12 +19,19 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity {
     private static SeekBar seekbar_var;
     private static TextView seekbar_text_var;
+    private static Button calculate_button_id;
+    private static EditText amount_borrowed_id;
+    private static CheckBox tax_checkBox_id;
+    private static RadioGroup loanTerm_id;
+    private static TextView result_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         seekbarMethod();
+
     }
 
 
@@ -85,5 +99,15 @@ public class MainActivity extends ActionBarActivity {
         double floatValue = 0.0;
         floatValue = value/10;
         return floatValue;
+    }
+
+    public void calculateButton(View v)
+    {
+       result_id= (TextView) findViewById(R.id.result_textView);
+       Log.d("NATE", "Button was pressed !!!");
+       amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
+       float amount_val = Float.parseFloat(amount_borrowed_id.getText().toString());
+        Log.d("NATE", "amount value ="+amount_val);
+        result_id.setText(" amount value is :"+amount_val);
     }
 }
