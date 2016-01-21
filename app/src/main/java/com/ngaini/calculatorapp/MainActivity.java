@@ -24,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
     private static CheckBox tax_checkBox_id;
     private static RadioGroup loanTerm_id;
     private static TextView result_id;
+    private static RadioButton radioButton_id;
 
 
     @Override
@@ -62,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
     {
         seekbar_var = (SeekBar) findViewById(R.id.interest_rate_seekbar);
         seekbar_text_var =(TextView) findViewById(R.id.interestRate_textview);
-        seekbar_text_var.setText("Interest rate ");
+        seekbar_text_var.setText("Interest rate "+getCoversionIntoFloat(seekbar_var.getProgress()));
 
         seekbar_var.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -94,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
         );
     }
 
-    double getCoversionIntoFloat(int value )
+    double getCoversionIntoFloat(float value )
     {
         double floatValue = 0.0;
         floatValue = value/10;
@@ -103,11 +104,37 @@ public class MainActivity extends ActionBarActivity {
 
     public void calculateButton(View v)
     {
+       // Fetch interest rate values
+        float interest_rate_val=(float)getCoversionIntoFloat(seekbar_var.getProgress());
+
        result_id= (TextView) findViewById(R.id.result_textView);
        Log.d("NATE", "Button was pressed !!!");
+       //Fetch amount borrowed value
        amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
        float amount_val = Float.parseFloat(amount_borrowed_id.getText().toString());
         Log.d("NATE", "amount value ="+amount_val);
-        result_id.setText(" amount value is :"+amount_val);
+
+        // fetch value from radioGroup
+        loanTerm_id = (RadioGroup) findViewById(R.id.term_radioGroup);
+        int selected_id= loanTerm_id.getCheckedRadioButtonId();
+        radioButton_id =(RadioButton) findViewById(selected_id);
+        int loanTerm_value= Integer.parseInt(radioButton_id.getText().toString());
+        float taxValue = getCheckBoxValue();
+
+        // Print values on the display area
+        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue);
+
+    }
+    public float getCheckBoxValue()
+    {
+        float temp= 0;
+        tax_checkBox_id = (CheckBox) findViewById(R.id.tax_checkBox);
+        if(tax_checkBox_id.isChecked())
+        {
+            temp =(float) 100.0;
+        }
+        return temp;
+
+
     }
 }
