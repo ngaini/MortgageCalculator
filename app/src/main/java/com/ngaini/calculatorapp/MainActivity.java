@@ -123,7 +123,7 @@ public class MainActivity extends ActionBarActivity {
         float monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
         // Print values on the display area
 //        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+monthly_payment_amount);
-        result_id.setText(" Monthly Payment Value is $"+monthly_payment_amount);
+        result_id.setText("Your Monthly Payment Amount is $"+monthly_payment_amount);
     }
     public float getCheckBoxValue()
     {
