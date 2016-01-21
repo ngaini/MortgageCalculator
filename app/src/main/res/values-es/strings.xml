@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CalculatorApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="amount_borrowed_text">Ingrese cantidad prestada</string>
+    <string name="interestRate_textview">Tasa de interés</string>
+    <string name="loan_term_text">Plazo del préstamo en años</string>
+    <string name="tax_option_text">Incluir Impuestos y Seguros</string>
+    <string name="calculate_button_text">CALCULAR</string>
+
+</resources>
