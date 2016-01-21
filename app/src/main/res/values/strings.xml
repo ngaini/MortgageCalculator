@@ -4,5 +4,10 @@
     <string name="app_name">CalculatorApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="amount_borrowed_text">Enter Amount Borrowed</string>
+    <string name="interestRate_textview">Interest Rate</string>
+    <string name="loan_term_text">Loan Term in years</string>
+    <string name="tax_option_text">Include Tax and Insurance</string>
+    <string name="calculate_button_text">CALCULATE</string>
 
 </resources>

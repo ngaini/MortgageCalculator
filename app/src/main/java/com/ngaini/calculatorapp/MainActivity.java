@@ -13,12 +13,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
     private static SeekBar seekbar_var;
-    private static TextView seekbar_text_var;
+    private static TextView seekbar_value_var;
     private static Button calculate_button_id;
     private static EditText amount_borrowed_id;
     private static CheckBox tax_checkBox_id;
@@ -62,8 +61,9 @@ public class MainActivity extends ActionBarActivity {
     private void seekbarMethod()
     {
         seekbar_var = (SeekBar) findViewById(R.id.interest_rate_seekbar);
-        seekbar_text_var =(TextView) findViewById(R.id.interestRate_textview);
-        seekbar_text_var.setText("Interest rate "+getCoversionIntoFloat(seekbar_var.getProgress()));
+        seekbar_value_var =(TextView) findViewById(R.id.interestRate_value_text);
+        seekbar_value_var.setText(" "+ getCoversionIntoFloat(seekbar_var.getProgress())+"/10.0");
+
 
         seekbar_var.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -72,11 +72,11 @@ public class MainActivity extends ActionBarActivity {
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
                     {
 //                        seekBar_value =progress;
-//                        seekbar_text_var.setText("Interest rate : "+getCoversionIntoFloat(progress));
+//                        seekbar_value_var.setText("Interest rate : "+getCoversionIntoFloat(progress));
 //                        Toast.makeText(MainActivity.this,"SeekBar in onProgress"+progress+"",Toast.LENGTH_SHORT).show();
 
                         float value= (float) (progress / 10.0);
-                        seekbar_text_var.setText("Interest rate : "+value);
+                        seekbar_value_var.setText(" " + value+"/10.0");
 //                        Toast.makeText(MainActivity.this,"SeekBar in onProgress "+progress+"",Toast.LENGTH_SHORT).show();
                     }
 
@@ -122,8 +122,8 @@ public class MainActivity extends ActionBarActivity {
         float taxValue = getCheckBoxValue();
         float monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
         // Print values on the display area
-        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+monthly_payment_amount);
-
+//        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+monthly_payment_amount);
+        result_id.setText(" Monthly Payment Value is $"+monthly_payment_amount);
     }
     public float getCheckBoxValue()
     {
