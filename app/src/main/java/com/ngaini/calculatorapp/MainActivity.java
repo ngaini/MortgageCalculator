@@ -2,6 +2,8 @@ package com.ngaini.calculatorapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
     private static SeekBar seekbar_var;
     private static TextView seekbar_value_var;
-    private static Button calculate_button_id;
+    private Button calculate_button_id;
     private static EditText amount_borrowed_id;
     private static CheckBox tax_checkBox_id;
     private static RadioGroup loanTerm_id;
@@ -31,6 +34,22 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         seekbarMethod();
+//        amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
+//        amount_borrowed_id.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void afterTextChanged(Editable arg0) {
+//                enableSubmitIfReady();
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//        });
+
 
     }
 
@@ -104,26 +123,54 @@ public class MainActivity extends ActionBarActivity {
 
     public void calculateButton(View v)
     {
-       // Fetch interest rate values
-        float interest_rate_val=(float)getCoversionIntoFloat(seekbar_var.getProgress());
+        String a=".";
+        float amount_val;
+        amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
+//        amount_val = Float.parseFloat(amount_borrowed_id.getText().toString());
+        String amount_val_string = amount_borrowed_id.getText().toString();
 
-       result_id= (TextView) findViewById(R.id.result_textView);
-       Log.d("NATE", "Button was pressed !!!");
-       //Fetch amount borrowed value
-       amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
-       float amount_val = Float.parseFloat(amount_borrowed_id.getText().toString());
-        Log.d("NATE", "amount value ="+amount_val);
+//        try
+//        {
 
-        // fetch value from radioGroup
-        loanTerm_id = (RadioGroup) findViewById(R.id.term_radioGroup);
-        int selected_id= loanTerm_id.getCheckedRadioButtonId();
-        radioButton_id =(RadioButton) findViewById(selected_id);
-        int loanTerm_value= Integer.parseInt(radioButton_id.getText().toString());
-        float taxValue = getCheckBoxValue();
-        float monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
-        // Print values on the display area
+//            Log.v("EMPTY STRING"," String is empty"+amount_val);
+
+        if (amount_val_string.trim().isEmpty()||amount_val_string.trim().matches("")||amount_val_string.trim().equals(a))
+////        if(amount_borrowed_id.getText().toString().isEmpty() || amount_borrowed_id.getText().toString().length() == 0 || amount_borrowed_id.getText().toString().equals("") || amount_borrowed_id.getText().toString() == null)
+        {
+//            Toast.makeText(MainActivity.this,"Amount Borrowed is empty",Toast.LENGTH_SHORT).show();
+//            Log.v("EMPTY STRING"," String is empty"+amount_val);
+            amount_borrowed_id.setError("Invalid input");
+            result_id.setText(" ");
+        }
+        else
+        {
+//            Fetch interest rate values
+            float interest_rate_val=(float)getCoversionIntoFloat(seekbar_var.getProgress());
+            amount_val = Float.parseFloat(amount_val_string);
+            result_id= (TextView) findViewById(R.id.result_textView);
+            Log.d("NATE", "Button was pressed !!!");
+            //Fetch amount borrowed value
+//            amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
+//            float amount_val = Float.parseFloat(amount_borrowed_id.getText().toString());
+            Log.d("NATE", "amount value ="+amount_val+" string:"+amount_val_string);
+
+            // fetch value from radioGroup
+            loanTerm_id = (RadioGroup) findViewById(R.id.term_radioGroup);
+            int selected_id= loanTerm_id.getCheckedRadioButtonId();
+            radioButton_id =(RadioButton) findViewById(selected_id);
+            int loanTerm_value= Integer.parseInt(radioButton_id.getText().toString());
+            float taxValue = getCheckBoxValue();
+            float monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
+            // Print values on the display area
 //        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+monthly_payment_amount);
-        result_id.setText("Your Monthly Payment Amount is $"+monthly_payment_amount);
+            result_id.setText("Your Monthly Payment Amount is $"+monthly_payment_amount);
+//        }
+        }
+//        catch (Exception e)
+//        {
+//            Toast.makeText(MainActivity.this,"Amount Borrowed is empty",Toast.LENGTH_SHORT).show();
+//            Log.v("EMPTY STRING"," String is empty"+amount_val);
+//        }
     }
     public float getCheckBoxValue()
     {
@@ -154,4 +201,9 @@ public class MainActivity extends ActionBarActivity {
         }
         return monthlyPayment_val;
     }
+//    public void enableSubmitIfReady() {
+//
+//        boolean isReady =amount_borrowed_id.getText().toString().length()>3;
+//        calculate_button_id.setEnabled(isReady);
+//    }
 }
