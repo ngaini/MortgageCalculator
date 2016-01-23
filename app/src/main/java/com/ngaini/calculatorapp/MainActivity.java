@@ -125,6 +125,7 @@ public class MainActivity extends ActionBarActivity {
     {
         String a=".";
         float amount_val;
+        float monthly_payment_amount=0;
         amount_borrowed_id = (EditText) findViewById(R.id.amount_borrowed_editText);
 //        amount_val = Float.parseFloat(amount_borrowed_id.getText().toString());
         String amount_val_string = amount_borrowed_id.getText().toString();
@@ -145,7 +146,7 @@ public class MainActivity extends ActionBarActivity {
         else
         {
 //            Fetch interest rate values
-            float interest_rate_val=(float)getCoversionIntoFloat(seekbar_var.getProgress());
+            double interest_rate_val=(float)getCoversionIntoFloat(seekbar_var.getProgress());
             amount_val = Float.parseFloat(amount_val_string);
             result_id= (TextView) findViewById(R.id.result_textView);
             Log.d("NATE", "Button was pressed !!!");
@@ -159,11 +160,14 @@ public class MainActivity extends ActionBarActivity {
             int selected_id= loanTerm_id.getCheckedRadioButtonId();
             radioButton_id =(RadioButton) findViewById(selected_id);
             int loanTerm_value= Integer.parseInt(radioButton_id.getText().toString());
-            float taxValue = getCheckBoxValue();
-            float monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
+            loanTerm_value = loanTerm_value*12;
+            float taxValue = getCheckBoxValue(amount_val);
+            interest_rate_val = interest_rate_val/1200;
+            monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
+//            monthly_payment_amount = Math.round(monthly_payment_amount);
             // Print values on the display area
-//        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+monthly_payment_amount);
-            result_id.setText("Your Monthly Payment Amount is $"+monthly_payment_amount);
+//        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+String.format("%.02f",monthly_payment_amount));
+            result_id.setText("Your Monthly Payment Amount is $"+String.format("%.02f",monthly_payment_amount));
 //        }
         }
 //        catch (Exception e)
@@ -172,30 +176,32 @@ public class MainActivity extends ActionBarActivity {
 //            Log.v("EMPTY STRING"," String is empty"+amount_val);
 //        }
     }
-    public float getCheckBoxValue()
+    public float getCheckBoxValue(float amount_value)
     {
         float temp= 0;
+
         tax_checkBox_id = (CheckBox) findViewById(R.id.tax_checkBox);
         if(tax_checkBox_id.isChecked())
         {
-            temp =(float) 100.0;
+            temp =(float) (amount_value*0.001);
         }
         return temp;
 
 
     }
 
-    public float calculateMonthlyPayment(float interest_rate_val, float amount_borrowed, int loan_term, float tax_value)
+    public float calculateMonthlyPayment(double interest_rate_val, float amount_borrowed, int loan_term, float tax_value)
     {
 
         float monthlyPayment_val;
+//        interest_rate_val = interest_rate_val/1200;
         if(interest_rate_val==0)
         {
             monthlyPayment_val = (float)((amount_borrowed/loan_term)+tax_value);
         }
         else
         {
-            double part1_value = Math.pow(1+interest_rate_val,-loan_term);
+            double part1_value = Math.pow(1+interest_rate_val,-(loan_term));
             double part2_value= (amount_borrowed*(interest_rate_val/(1-part1_value)));
             monthlyPayment_val=(float)  part2_value+tax_value;
         }
