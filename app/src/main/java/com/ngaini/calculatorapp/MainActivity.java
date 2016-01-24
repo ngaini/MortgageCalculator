@@ -142,6 +142,7 @@ public class MainActivity extends ActionBarActivity {
 //            Log.v("EMPTY STRING"," String is empty"+amount_val);
             amount_borrowed_id.setError("Invalid input");
             result_id.setText(" ");
+            findViewById(R.id.result_statement_textView).setVisibility(View.GONE);
         }
         else
         {
@@ -163,11 +164,15 @@ public class MainActivity extends ActionBarActivity {
             loanTerm_value = loanTerm_value*12;
             float taxValue = getCheckBoxValue(amount_val);
             interest_rate_val = interest_rate_val/1200;
+            findViewById(R.id.result_statement_textView).setVisibility(View.VISIBLE);
+
+
             monthly_payment_amount = calculateMonthlyPayment(interest_rate_val,amount_val,loanTerm_value,taxValue);
+
 //            monthly_payment_amount = Math.round(monthly_payment_amount);
             // Print values on the display area
 //        result_id.setText(" amount value is :"+amount_val+" IR val :"+interest_rate_val+" ::"+loanTerm_value+"::"+taxValue+"::"+String.format("%.02f",monthly_payment_amount));
-            result_id.setText("Your Monthly Payment Amount is $"+String.format("%.02f",monthly_payment_amount));
+            result_id.setText(" $"+String.format("%.02f",monthly_payment_amount));
 //        }
         }
 //        catch (Exception e)

@@ -48,6 +48,7 @@
         <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:digits="0123456789."
         android:id="@+id/amount_borrowed_editText"
         android:minWidth="50dp"
         android:minHeight="50dp"
@@ -166,15 +167,37 @@
         android:id="@+id/calculate_button"
         android:onClick="calculateButton"
         />
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/result_textView"
-        android:textStyle="bold"
-        android:textColor="#ff114b08"
-        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center"
-        />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/result_statement_text"
+            android:id="@+id/result_statement_textView"
+            android:textStyle="bold"
+            android:textColor="#ff114b08"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_marginRight="3dp"
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/result_textView"
+            android:textStyle="bold"
+            android:textColor="#ff114b08"
+            android:textSize="15dp"
+            android:gravity="center"
+
+            />
+
+        </LinearLayout>
 
 </LinearLayout>

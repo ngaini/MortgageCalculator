@@ -9,5 +9,6 @@
     <string name="loan_term_text">Plazo del préstamo en años</string>
     <string name="tax_option_text">Incluir Impuestos y Seguros</string>
     <string name="calculate_button_text">CALCULAR</string>
+    <string name="result_statement_text">Su pago mensual es de</string>
 
 </resources>
